@@ -5,7 +5,7 @@ import "github.com/dmitryikh/leaves/transformation"
 type ensemble interface {
 	PredictInner(input, predictions []float64, startIndex int)
 	Name() string
-	NFeatures() int
+	NumFeatures() int
 
 }
 type EnsembleBase struct {

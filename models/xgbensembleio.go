@@ -80,7 +80,7 @@ func convertFeatToIdx(featureMap map[string]int, feature string) (int, error) {
 
 func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int) (*xgbTree, int, error) {
 	stack := make([]*xgboostJSON, 0)
-	fMap := make(map[int]struct{})
+	maxFeatIdx := 0
 	t := &xgbTree{}
 	stack = append(stack, xgbTreeJSON)
 	var node *xgbNode
@@ -101,8 +101,8 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 			}
 		} else {
 			featIdx, err := convertFeatToIdx(featureMap, xgbTreeJSON.SplitFeatureID)
-			if _, ok := fMap[featIdx]; !ok {
-				fMap[featIdx] = struct{}{}
+			if featIdx > maxFeatIdx {
+				maxFeatIdx = featIdx
 			}
 			if err != nil {
 				return nil, 0, err
@@ -136,7 +136,7 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 		})
 	}
 
-	return t, len(fMap), nil
+	return t, maxFeatIdx, nil
 }
 
 // LoadXGBoostFromJSON loads xgboost model from json file.
@@ -166,24 +166,24 @@ func LoadXGBoostFromJSON(modelPath,
 		}
 	}
 
-	// TODO: Add num class check here, totalTrees % numClasses == 0
-	if numClasses <= 0 {
-		return nil, fmt.Errorf("num class cannot be 0 or smaller: %d", numClasses)
-	}
-
 	if maxDepth < 0 {
 		return nil, fmt.Errorf("max depth cannot be smaller than 0: %d", maxDepth)
 	}
 
-	e := &xgbEnsemble{name: "xgboost", numClasses: numClasses}
 	nTrees := len(xgbEnsembleJSON)
+	if numClasses <= 0 {
+		return nil, fmt.Errorf("num class cannot be 0 or smaller: %d", numClasses)
+	}
 	if nTrees == 0 {
 		return nil, fmt.Errorf("no trees in file")
-	} else if nTrees%e.numClasses != 0 {
-		return nil, fmt.Errorf("wrong number of trees %d for number of class %d", nTrees, e.numClasses)
+	} else if nTrees%numClasses != 0 {
+		return nil, fmt.Errorf("wrong number of trees %d for number of class %d", nTrees, numClasses)
 	}
 
+	e := &xgbEnsemble{name: "xgboost", numClasses: numClasses}
 	e.Trees = make([]*xgbTree, 0, nTrees)
+	// TODO: Need to check if max feature index will be the last feature column.
+	// if it is not the case we should find another way to find the number of features.
 	maxFeat := 0
 	for i := 0; i < nTrees; i++ {
 		tree, numFeat, err := buildTree(xgbEnsembleJSON[i], maxDepth, featMap)
@@ -195,7 +195,7 @@ func LoadXGBoostFromJSON(modelPath,
 			maxFeat = numFeat
 		}
 	}
-	e.numFeat = maxFeat
+	e.numFeat = maxFeat + 1
 
 	// TODO: Change transformation function.
 	return &EnsembleBase{Transform: &transformation.TransformRaw{NumOutputGroups: e.numClasses}}, nil

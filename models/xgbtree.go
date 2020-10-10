@@ -1,13 +1,15 @@
 package models
 
 import (
-	"log"
-	"math"
+	"fmt"
+
+	"github.com/baobui/xgboost-go/mat"
 )
 
 // xgbtree constant values.
 const (
 	isLeaf        = 1
+	// TODO: Check this value.
 	zeroThreshold = 1e-35
 )
 
@@ -26,21 +28,18 @@ type xgbTree struct {
 	nodes []*xgbNode
 }
 
-func (t *xgbTree) predict(features []float64) float64 {
+func (t *xgbTree) predict(features mat.SparseVector) (float64, error) {
 	idx := 0
 	for {
 		node := t.nodes[idx]
 		if node == nil {
-			log.Fatalf("nil node")
-		}
-		if node.Feature >= len(features) {
-			log.Fatalf("wrong input dimension: %d, please check your input data", len(features))
+			return 0, fmt.Errorf("nil node")
 		}
 		if node.Flags&isLeaf > 0 {
-			return node.LeafValues
+			return node.LeafValues, nil
 		}
-		v := features[node.Feature]
-		if math.IsNaN(v) {
+		v, ok := features[node.Feature]
+		if !ok {
 			// missing value will be represented as NaN value.
 			idx = node.Missing
 		} else if v >= node.Threshold {
