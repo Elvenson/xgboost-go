@@ -1,7 +1,9 @@
-package pkg
+package models
 
 type xgbEnsemble struct {
 	Trees      []*xgbTree
-	numClasses int
 	name       string
+	numClasses int
+	numFeat    int
 }
+
