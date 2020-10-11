@@ -1,0 +1,9 @@
+syntax = "proto3";
+package protobuf;
+
+enum ActivateType {
+    UNKNOWN = 0;
+    RAW = 1;
+    LOGISTIC = 2;
+    SOFTMAX = 3;
+}

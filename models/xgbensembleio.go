@@ -5,14 +5,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"math"
 	"os"
 	"sort"
 	"strconv"
 	"strings"
 
-	"github.com/dmitryikh/leaves/transformation"
+	"github.com/baobui/xgboost-go/activation"
+	"github.com/baobui/xgboost-go/inference"
 )
 
 type xgboostJSON struct {
@@ -85,6 +85,7 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 	stack = append(stack, xgbTreeJSON)
 	var node *xgbNode
 	var maxNumNodes int
+	var maxIdx int
 	if maxDepth != 0 {
 		maxNumNodes = int(math.Pow(2, float64(maxDepth+1)) - 1)
 		t.nodes = make([]*xgbNode, maxNumNodes)
@@ -115,14 +116,21 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 				Missing:   stackData.MissingID,
 				Feature:   featIdx,
 			}
+			// find real length of the tree.
+			if maxDepth != 0 {
+				t := int(math.Max(float64(stackData.NoID), float64(stackData.YesID)))
+				if t > maxIdx {
+					maxIdx = t
+				}
+			}
 			for _, c := range stackData.Children {
 				stack = append(stack, c)
 			}
 		}
 		if maxNumNodes > 0 {
 			if node.NodeID >= maxNumNodes {
-				log.Fatalf("wrong tree max depth %d, please check your model again for the correct parameter",
-					maxDepth)
+				return nil, 0, fmt.Errorf("wrong tree max depth %d, please check your model again for the"+
+					" correct parameter", maxDepth)
 			}
 			t.nodes[node.NodeID] = node
 		} else {
@@ -134,6 +142,8 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 		sort.SliceStable(t.nodes, func(i, j int) bool {
 			return t.nodes[i].NodeID < t.nodes[j].NodeID
 		})
+	} else {
+		t.nodes = t.nodes[:maxIdx+1]
 	}
 
 	return t, maxFeatIdx, nil
@@ -144,7 +154,7 @@ func LoadXGBoostFromJSON(modelPath,
 	featuresMapPath string,
 	numClasses int,
 	maxDepth int,
-	loadTransformation bool) (*EnsembleBase, error) {
+	activation activation.Activation) (*inference.EnsembleBase, error) {
 	modelFile, err := os.Open(modelPath)
 	if err != nil {
 		return nil, err
@@ -197,6 +207,5 @@ func LoadXGBoostFromJSON(modelPath,
 	}
 	e.numFeat = maxFeat + 1
 
-	// TODO: Change transformation function.
-	return &EnsembleBase{Transform: &transformation.TransformRaw{NumOutputGroups: e.numClasses}}, nil
+	return &inference.EnsembleBase{Ensemble: e, Activation: activation}, nil
 }
