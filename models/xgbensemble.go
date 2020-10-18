@@ -9,14 +9,17 @@ type xgbEnsemble struct {
 	numFeat    int
 }
 
+// Name returns name of ensemble model.
 func (e *xgbEnsemble) Name() string {
 	return e.name
 }
 
+// NumFeatures returns number of features for this ensemble model.
 func (e *xgbEnsemble) NumFeatures() int {
 	return e.numFeat
 }
 
+// PredictInner returns prediction of this ensemble model.
 func (e *xgbEnsemble) PredictInner(features mat.SparseVector) (mat.Vector, error) {
 	// number of trees for 1 class.
 	pred := make([]float64, e.numClasses)
