@@ -1,6 +1,7 @@
 import xgboost as xgb
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
+from sklearn.datasets import dump_svmlight_file
 import numpy as np
 
 X, y = datasets.load_iris(return_X_y=True)
@@ -14,7 +15,15 @@ num_round = 10
 bst = xgb.train(param, dtrain, num_round)
 y_pred = bst.predict(xgb.DMatrix(X_test))
 
+clf = xgb.XGBClassifier(max_depth=4, objective='multi:softprob', n_estimators=10,
+                        num_classes=3)
+
+clf.fit(X_train, y_train)
+y_pred_proba = clf.predict_proba(X_test)
+
 np.savetxt('../data/iris_xgboost_true_prediction.txt', y_pred, delimiter='\t')
+np.savetxt('../data/iris_xgboost_true_prediction_proba.txt', y_pred_proba, delimiter='\t')
 np.savetxt('../data/iris_test.tsv', X_test, delimiter='\t')
+dump_svmlight_file(X_test, y_test, '../data/iris_test.libsvm')
 bst.dump_model('../data/iris_xgboost_dump.json', dump_format='json')
 bst.save_model('../data/iris_xgboost.json')
