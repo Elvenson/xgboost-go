@@ -5,21 +5,21 @@ import (
 	"github.com/baobui/xgboost-go/mat"
 )
 
-// Ensemble ...
-type Ensemble interface {
+// EnsembleBase ...
+type EnsembleBase interface {
 	PredictInner(features mat.SparseVector) (mat.Vector, error)
 	Name() string
 	NumFeatures() int
 }
 
 // EnsembleBase ...
-type EnsembleBase struct {
-	Ensemble
+type Ensemble struct {
+	EnsembleBase
 	activation.Activation
 }
 
 // Predict predicts using ensemble model interface.
-func (e *EnsembleBase) Predict(features mat.SparseMatrix) (mat.Matrix, error) {
+func (e *Ensemble) Predict(features mat.SparseMatrix) (mat.Matrix, error) {
 	results := mat.Matrix{Vectors: make([]*mat.Vector, len(features.Vectors))}
 	for i, row := range features.Vectors {
 		pred, err := e.PredictInner(row)

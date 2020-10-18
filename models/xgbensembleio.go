@@ -154,7 +154,7 @@ func LoadXGBoostFromJSON(modelPath,
 	featuresMapPath string,
 	numClasses int,
 	maxDepth int,
-	activation activation.Activation) (*inference.EnsembleBase, error) {
+	activation activation.Activation) (*inference.Ensemble, error) {
 	modelFile, err := os.Open(modelPath)
 	if err != nil {
 		return nil, err
@@ -207,5 +207,5 @@ func LoadXGBoostFromJSON(modelPath,
 	}
 	e.numFeat = maxFeat + 1
 
-	return &inference.EnsembleBase{Ensemble: e, Activation: activation}, nil
+	return &inference.Ensemble{EnsembleBase: e, Activation: activation}, nil
 }
