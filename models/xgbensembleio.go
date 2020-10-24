@@ -101,12 +101,12 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 				LeafValues: stackData.LeafValue,
 			}
 		} else {
-			featIdx, err := convertFeatToIdx(featureMap, xgbTreeJSON.SplitFeatureID)
-			if featIdx > maxFeatIdx {
-				maxFeatIdx = featIdx
-			}
+			featIdx, err := convertFeatToIdx(featureMap, stackData.SplitFeatureID)
 			if err != nil {
 				return nil, 0, err
+			}
+			if featIdx > maxFeatIdx {
+				maxFeatIdx = featIdx
 			}
 			node = &xgbNode{
 				NodeID:    stackData.NodeID,

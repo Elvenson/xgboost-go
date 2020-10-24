@@ -1,0 +1,174 @@
+[
+  { "nodeid": 0, "depth": 0, "split": "worst_concave_points", "split_condition": 0.142349988, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "depth": 1, "split": "worst_area", "split_condition": 957.450012, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "depth": 2, "split": "worst_perimeter", "split_condition": 107.75, "yes": 7, "no": 8, "missing": 7 , "children": [
+        { "nodeid": 7, "depth": 3, "split": "area_error", "split_condition": 48.9749985, "yes": 15, "no": 16, "missing": 15 , "children": [
+          { "nodeid": 15, "leaf": 1.9256506 }, 
+          { "nodeid": 16, "leaf": -0 }
+        ]}, 
+        { "nodeid": 8, "depth": 3, "split": "mean_radius", "split_condition": 14.0799999, "yes": 17, "no": 18, "missing": 17 , "children": [
+          { "nodeid": 17, "leaf": -1 }, 
+          { "nodeid": 18, "leaf": 1.15789473 }
+        ]}
+      ]}, 
+      { "nodeid": 4, "depth": 2, "split": "mean_texture", "split_condition": 18.8850002, "yes": 9, "no": 10, "missing": 9 , "children": [
+        { "nodeid": 9, "leaf": -0 }, 
+        { "nodeid": 10, "leaf": -1.4666667 }
+      ]}
+    ]}, 
+    { "nodeid": 2, "depth": 1, "split": "worst_area", "split_condition": 729.549988, "yes": 5, "no": 6, "missing": 5 , "children": [
+      { "nodeid": 5, "depth": 2, "split": "mean_smoothness", "split_condition": 0.1083, "yes": 11, "no": 12, "missing": 11 , "children": [
+        { "nodeid": 11, "leaf": 1.33333337 }, 
+        { "nodeid": 12, "leaf": -1.20000005 }
+      ]}, 
+      { "nodeid": 6, "depth": 2, "split": "mean_texture", "split_condition": 15.3700008, "yes": 13, "no": 14, "missing": 13 , "children": [
+        { "nodeid": 13, "leaf": -0.400000006 }, 
+        { "nodeid": 14, "depth": 3, "split": "mean_concavity", "split_condition": 0.077820003, "yes": 19, "no": 20, "missing": 19 , "children": [
+          { "nodeid": 19, "leaf": -0.5 }, 
+          { "nodeid": 20, "leaf": -1.939394 }
+        ]}
+      ]}
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "mean_concave_points", "split_condition": 0.0489199981, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "depth": 1, "split": "mean_texture", "split_condition": 21.5750008, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "depth": 2, "split": "area_error", "split_condition": 38.4150009, "yes": 7, "no": 8, "missing": 7 , "children": [
+        { "nodeid": 7, "leaf": 1.1230942 }, 
+        { "nodeid": 8, "leaf": 0.290251553 }
+      ]}, 
+      { "nodeid": 4, "depth": 2, "split": "worst_radius", "split_condition": 14.4300003, "yes": 9, "no": 10, "missing": 9 , "children": [
+        { "nodeid": 9, "leaf": 0.866951168 }, 
+        { "nodeid": 10, "depth": 3, "split": "compactness_error", "split_condition": 0.0120250005, "yes": 15, "no": 16, "missing": 15 , "children": [
+          { "nodeid": 15, "leaf": -1.35367692 }, 
+          { "nodeid": 16, "leaf": 0.303786576 }
+        ]}
+      ]}
+    ]}, 
+    { "nodeid": 2, "depth": 1, "split": "worst_perimeter", "split_condition": 104.100006, "yes": 5, "no": 6, "missing": 5 , "children": [
+      { "nodeid": 5, "depth": 2, "split": "worst_smoothness", "split_condition": 0.178299993, "yes": 11, "no": 12, "missing": 11 , "children": [
+        { "nodeid": 11, "leaf": 0.768755019 }, 
+        { "nodeid": 12, "leaf": -0.514137685 }
+      ]}, 
+      { "nodeid": 6, "depth": 2, "split": "worst_texture", "split_condition": 20.3549995, "yes": 13, "no": 14, "missing": 13 , "children": [
+        { "nodeid": 13, "depth": 3, "split": "mean_radius", "split_condition": 16.8699989, "yes": 17, "no": 18, "missing": 17 , "children": [
+          { "nodeid": 17, "leaf": 0.638263881 }, 
+          { "nodeid": 18, "leaf": -0.771065712 }
+        ]}, 
+        { "nodeid": 14, "leaf": -1.20938683 }
+      ]}
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "worst_concave_points", "split_condition": 0.110849999, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "depth": 1, "split": "radius_error", "split_condition": 0.566249967, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "depth": 2, "split": "worst_texture", "split_condition": 32.8300018, "yes": 7, "no": 8, "missing": 7 , "children": [
+        { "nodeid": 7, "depth": 3, "split": "worst_symmetry", "split_condition": 0.329450011, "yes": 11, "no": 12, "missing": 11 , "children": [
+          { "nodeid": 11, "leaf": 0.988147557 }, 
+          { "nodeid": 12, "leaf": 0.197919026 }
+        ]}, 
+        { "nodeid": 8, "leaf": 0.178187609 }
+      ]}, 
+      { "nodeid": 4, "leaf": -0.0292120669 }
+    ]}, 
+    { "nodeid": 2, "depth": 1, "split": "area_error", "split_condition": 31.1700001, "yes": 5, "no": 6, "missing": 5 , "children": [
+      { "nodeid": 5, "depth": 2, "split": "worst_texture", "split_condition": 26.2750015, "yes": 9, "no": 10, "missing": 9 , "children": [
+        { "nodeid": 9, "leaf": 0.829586327 }, 
+        { "nodeid": 10, "depth": 3, "split": "mean_concave_points", "split_condition": 0.0548949987, "yes": 13, "no": 14, "missing": 13 , "children": [
+          { "nodeid": 13, "leaf": -0.0383893661 }, 
+          { "nodeid": 14, "leaf": -0.894984603 }
+        ]}
+      ]}, 
+      { "nodeid": 6, "leaf": -1.02690852 }
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "worst_area", "split_condition": 874.849976, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "depth": 1, "split": "worst_texture", "split_condition": 29.2250004, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "depth": 2, "split": "worst_compactness", "split_condition": 0.0866750032, "yes": 7, "no": 8, "missing": 7 , "children": [
+        { "nodeid": 7, "leaf": -0.0709136873 }, 
+        { "nodeid": 8, "depth": 3, "split": "worst_compactness", "split_condition": 0.348550022, "yes": 11, "no": 12, "missing": 11 , "children": [
+          { "nodeid": 11, "leaf": 0.917927325 }, 
+          { "nodeid": 12, "leaf": 0.000908494403 }
+        ]}
+      ]}, 
+      { "nodeid": 4, "depth": 2, "split": "mean_texture", "split_condition": 23.8699989, "yes": 9, "no": 10, "missing": 9 , "children": [
+        { "nodeid": 9, "leaf": -0.752491057 }, 
+        { "nodeid": 10, "leaf": 0.491739243 }
+      ]}
+    ]}, 
+    { "nodeid": 2, "depth": 1, "split": "mean_texture", "split_condition": 18.3800011, "yes": 5, "no": 6, "missing": 5 , "children": [
+      { "nodeid": 5, "leaf": -0.161077604 }, 
+      { "nodeid": 6, "leaf": -0.867159784 }
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "worst_area", "split_condition": 711.300049, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "depth": 1, "split": "compactness_error", "split_condition": 0.0120250005, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "leaf": -0.119858712 }, 
+      { "nodeid": 4, "depth": 2, "split": "mean_smoothness", "split_condition": 0.107099995, "yes": 7, "no": 8, "missing": 7 , "children": [
+        { "nodeid": 7, "leaf": 0.798094213 }, 
+        { "nodeid": 8, "leaf": 0.196188718 }
+      ]}
+    ]}, 
+    { "nodeid": 2, "depth": 1, "split": "worst_concavity", "split_condition": 0.231400013, "yes": 5, "no": 6, "missing": 5 , "children": [
+      { "nodeid": 5, "leaf": 0.279408604 }, 
+      { "nodeid": 6, "depth": 2, "split": "radius_error", "split_condition": 0.254350007, "yes": 9, "no": 10, "missing": 9 , "children": [
+        { "nodeid": 9, "leaf": -0.169663087 }, 
+        { "nodeid": 10, "leaf": -0.752452731 }
+      ]}
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "worst_texture", "split_condition": 23.3499985, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "depth": 1, "split": "worst_concave_points", "split_condition": 0.136550009, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "leaf": 0.676270008 }, 
+      { "nodeid": 4, "leaf": 0.0649775714 }
+    ]}, 
+    { "nodeid": 2, "depth": 1, "split": "mean_smoothness", "split_condition": 0.0903899968, "yes": 5, "no": 6, "missing": 5 , "children": [
+      { "nodeid": 5, "depth": 2, "split": "mean_fractal_dimension", "split_condition": 0.0573199987, "yes": 7, "no": 8, "missing": 7 , "children": [
+        { "nodeid": 7, "leaf": -0.326284021 }, 
+        { "nodeid": 8, "leaf": 0.606267214 }
+      ]}, 
+      { "nodeid": 6, "depth": 2, "split": "mean_fractal_dimension", "split_condition": 0.0632700026, "yes": 9, "no": 10, "missing": 9 , "children": [
+        { "nodeid": 9, "leaf": -0.675102949 }, 
+        { "nodeid": 10, "leaf": -0.200931102 }
+      ]}
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "worst_concavity", "split_condition": 0.207949996, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "depth": 1, "split": "radius_error", "split_condition": 0.339850008, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "leaf": 0.615091383 }, 
+      { "nodeid": 4, "leaf": 0.0652931333 }
+    ]}, 
+    { "nodeid": 2, "depth": 1, "split": "worst_symmetry", "split_condition": 0.269450009, "yes": 5, "no": 6, "missing": 5 , "children": [
+      { "nodeid": 5, "leaf": 0.210927114 }, 
+      { "nodeid": 6, "depth": 2, "split": "worst_area", "split_condition": 724.049988, "yes": 7, "no": 8, "missing": 7 , "children": [
+        { "nodeid": 7, "leaf": 0.0217199586 }, 
+        { "nodeid": 8, "leaf": -0.587608159 }
+      ]}
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "worst_area", "split_condition": 553.299988, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "leaf": 0.475401312 }, 
+    { "nodeid": 2, "depth": 1, "split": "mean_smoothness", "split_condition": 0.0899550021, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "leaf": 0.235072598 }, 
+      { "nodeid": 4, "depth": 2, "split": "texture_error", "split_condition": 1.37400007, "yes": 5, "no": 6, "missing": 5 , "children": [
+        { "nodeid": 5, "leaf": -0.0521557853 }, 
+        { "nodeid": 6, "leaf": -0.51898706 }
+      ]}
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "worst_concavity", "split_condition": 0.207949996, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "leaf": 0.316972673 }, 
+    { "nodeid": 2, "depth": 1, "split": "worst_texture", "split_condition": 25.5149994, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "leaf": 0.151291728 }, 
+      { "nodeid": 4, "leaf": -0.336530745 }
+    ]}
+  ]},
+  { "nodeid": 0, "depth": 0, "split": "area_error", "split_condition": 40.0100021, "yes": 1, "no": 2, "missing": 1 , "children": [
+    { "nodeid": 1, "depth": 1, "split": "worst_symmetry", "split_condition": 0.299250007, "yes": 3, "no": 4, "missing": 3 , "children": [
+      { "nodeid": 3, "depth": 2, "split": "worst_fractal_dimension", "split_condition": 0.0779999942, "yes": 5, "no": 6, "missing": 5 , "children": [
+        { "nodeid": 5, "leaf": 0.459454387 }, 
+        { "nodeid": 6, "leaf": 0.105021186 }
+      ]}, 
+      { "nodeid": 4, "leaf": -0.099408403 }
+    ]}, 
+    { "nodeid": 2, "leaf": -0.380893648 }
+  ]}
+]

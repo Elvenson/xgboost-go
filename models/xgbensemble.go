@@ -1,6 +1,8 @@
 package models
 
-import "github.com/baobui/xgboost-go/mat"
+import (
+	"github.com/baobui/xgboost-go/mat"
+)
 
 type xgbEnsemble struct {
 	Trees      []*xgbTree
@@ -14,9 +16,9 @@ func (e *xgbEnsemble) Name() string {
 	return e.name
 }
 
-// NumFeatures returns number of features for this ensemble model.
-func (e *xgbEnsemble) NumFeatures() int {
-	return e.numFeat
+// NumClasses returns number of features for this ensemble model.
+func (e *xgbEnsemble) NumClasses() int {
+	return e.numClasses
 }
 
 // PredictInner returns prediction of this ensemble model.
