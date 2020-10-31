@@ -8,19 +8,20 @@ import (
 	"github.com/baobui/xgboost-go/protobuf"
 )
 
-// EnsembleBase ...
+// EnsembleBase contains interface of a base model.
 type EnsembleBase interface {
 	PredictInner(features mat.SparseVector) (mat.Vector, error)
 	Name() string
 	NumClasses() int
 }
 
-// EnsembleBase ...
+// Ensemble struct contains ensemble model interface that a model needs to implement.
 type Ensemble struct {
 	EnsembleBase
 	activation.Activation
 }
 
+// PredictRegression predicts float number for regression task using ensemble model interface.
 func (e *Ensemble) PredictRegression(features mat.SparseMatrix, baseVal float64) (mat.Matrix, error) {
 	if e.NumClasses() == 0 {
 		return mat.Matrix{}, fmt.Errorf("0 class please check your model")

@@ -65,11 +65,11 @@ func loadFeatureMap(filePath string) (map[string]int, error) {
 
 func convertFeatToIdx(featureMap map[string]int, feature string) (int, error) {
 	if featureMap != nil {
-		if idx, ok := featureMap[feature]; !ok {
+		if _, ok := featureMap[feature]; !ok {
 			return 0, fmt.Errorf("cannot find feature %s in feature map", feature)
-		} else {
-			return idx, nil
 		}
+		return featureMap[feature], nil
+
 	}
 
 	// if no feature map use the default feature name which are: f0, f1, f2, ...

@@ -11,4 +11,3 @@ type Activation interface {
 	Type() protobuf.ActivateType
 	Name() string
 }
-

@@ -8,7 +8,6 @@ import (
 	"github.com/baobui/xgboost-go/protobuf"
 )
 
-
 // Softmax ...
 type Softmax struct{}
 

@@ -44,9 +44,9 @@ func ReadLibsvmFileToSparseMatrix(fileName string) (SparseMatrix, error) {
 		if err != nil {
 			if err != io.EOF {
 				return SparseMatrix{}, err
-			} else {
-				break
 			}
+			break
+
 		}
 		line = strings.TrimSpace(line)
 		if line == "" {
@@ -81,7 +81,7 @@ func ReadLibsvmFileToSparseMatrix(fileName string) (SparseMatrix, error) {
 	return sparseMatrix, nil
 }
 
-// ReadCSVFileToDenseMatrix
+// ReadCSVFileToDenseMatrix reads CSV file to dense matrix.
 func ReadCSVFileToDenseMatrix(fileName string, delimiter string, defaultVal float64) (Matrix, error) {
 	file, err := os.Open(fileName)
 	if err != nil {
