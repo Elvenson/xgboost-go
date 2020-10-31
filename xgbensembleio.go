@@ -150,7 +150,6 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 }
 
 // LoadXGBoostFromJSON loads xgboost model from json file.
-//
 func LoadXGBoostFromJSON(
 	modelPath,
 	featuresMapPath string,
