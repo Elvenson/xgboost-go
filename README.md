@@ -31,13 +31,13 @@ package main
 import (
 	"fmt"
 
+	xgb "github.com/Elvenson/xgboost-go"
 	"github.com/Elvenson/xgboost-go/activation"
 	"github.com/Elvenson/xgboost-go/mat"
-	"github.com/Elvenson/xgboost-go/models"
 )
 
 func main() {
-	ensemble, err := models.LoadXGBoostFromJSON("your model path",
+	ensemble, err := xgb.LoadXGBoostFromJSON("your model path",
 		"", 1, 4, &activation.Logistic{})
 	if err != nil {
 		panic(err)
