@@ -8,7 +8,8 @@ import (
 	"github.com/baobui/xgboost-go/protobuf"
 )
 
-// Logistic ...
+// Logistic is struct contains necessary data for doing logistic calculation
+// for now is empty.
 type Logistic struct{}
 
 // sigmoid applies sigmoid transformation to value

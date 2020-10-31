@@ -7,10 +7,11 @@ import (
 	"github.com/baobui/xgboost-go/protobuf"
 )
 
-// Raw ...
+// Raw is struct contains necessary data for doing logistic calculation
+// for now is empty.
 type Raw struct{}
 
-// Transform does nothing just return the raw prediction.
+// Transform does nothing just returns the raw prediction.
 func (a *Raw) Transform(rawPredictions mat.Vector) (mat.Vector, error) {
 	if len(rawPredictions) == 0 {
 		return mat.Vector{}, fmt.Errorf("prediction should have at least 1 dimension")

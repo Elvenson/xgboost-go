@@ -1,4 +1,4 @@
-package models
+package xgboost
 
 import (
 	"github.com/baobui/xgboost-go/mat"

@@ -8,7 +8,8 @@ import (
 	"github.com/baobui/xgboost-go/protobuf"
 )
 
-// Softmax ...
+// Softmax is struct contains necessary data for doing logistic calculation
+// for now is empty.
 type Softmax struct{}
 
 // softmax function.
@@ -29,7 +30,7 @@ func softmax(vector mat.Vector) mat.Vector {
 	return r
 }
 
-// Transform passes prediction through logistic function.
+// Transform passes prediction through softmax function.
 func (a *Softmax) Transform(rawPredictions mat.Vector) (mat.Vector, error) {
 	if len(rawPredictions) == 0 {
 		return mat.Vector{}, fmt.Errorf("prediction should have at least 1 dimension")

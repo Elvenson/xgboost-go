@@ -1,7 +1,4 @@
-// Package models implements loading DMLC XGBoost json model generated from `dump_model` python API call
-// and its inference APIs.
-//
-package models
+package xgboost
 
 import (
 	"bufio"

@@ -12,18 +12,18 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Vector ...
+// Vector is a list of float numbers.
 type Vector []float64
 
-// SparseVector ...
+// SparseVector is a map with index is a key and value is a value at that index.
 type SparseVector map[int]float64
 
-// SparseMatrix ...
+// SparseMatrix is a list of sparse vectors.
 type SparseMatrix struct {
 	Vectors []SparseVector
 }
 
-// Matrix ...
+// Matrix is a list of vector.
 type Matrix struct {
 	Vectors []*Vector
 }
@@ -130,7 +130,7 @@ func ReadCSVFileToDenseMatrix(fileName string, delimiter string, defaultVal floa
 	return matrix, nil
 }
 
-// IsEqualVectors compares 2 vectors.
+// IsEqualVectors compares 2 vectors with a threshold.
 func IsEqualVectors(v1, v2 *Vector, threshold float64) error {
 	if len(*v1) != len(*v2) {
 		return fmt.Errorf("different vector length v1=%d, v2=%d", len(*v1), len(*v2))
@@ -159,7 +159,7 @@ func GetVectorMaxIdx(v *Vector) (int, error) {
 	return r, nil
 }
 
-// IsEqualMatrices compares 2 matrices.
+// IsEqualMatrices compares 2 matrices with a threshold.
 func IsEqualMatrices(m1, m2 *Matrix, threshold float64) error {
 	if len(m1.Vectors) != len(m2.Vectors) {
 		return fmt.Errorf("row  matrix mismatch: m1 got %d rows, m2 got %d rows", len(m1.Vectors), len(m2.Vectors))
