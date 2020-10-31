@@ -1,3 +1,6 @@
+// Package models implements loading DMLC XGBoost json model generated from `dump_model` python API call
+// and its inference APIs.
+//
 package models
 
 import (
@@ -150,7 +153,9 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 }
 
 // LoadXGBoostFromJSON loads xgboost model from json file.
-func LoadXGBoostFromJSON(modelPath,
+//
+func LoadXGBoostFromJSON(
+	modelPath,
 	featuresMapPath string,
 	numClasses int,
 	maxDepth int,

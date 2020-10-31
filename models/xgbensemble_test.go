@@ -34,6 +34,25 @@ func TestEnsemble_PredictBreastCancer(t *testing.T) {
 
 	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
 	assert.NilError(t, err)
+
+	// with undefined depth
+	ensemble, err = LoadXGBoostFromJSON(modelPath,
+		"", 1, 0, &activation.Logistic{})
+	assert.NilError(t, err)
+
+	predictions, err = ensemble.PredictProba(input)
+	assert.NilError(t, err)
+
+	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
+	assert.NilError(t, err)
+
+	predictions, err = ensemble.Predict(input)
+	assert.NilError(t, err)
+
+	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
+	assert.NilError(t, err)
+
+	assert.Check(t, len(ensemble.Name()) != 0)
 }
 
 func TestEnsemble_PredictBreastCancerFeatureMap(t *testing.T) {
@@ -107,6 +126,23 @@ func TestEnsemble_Iris(t *testing.T) {
 
 	expectedProbPath := "../test/data/iris_xgboost_true_prediction_proba.txt"
 	expectedProb, err := mat.ReadCSVFileToDenseMatrix(expectedProbPath, "\t", 0.0)
+	assert.NilError(t, err)
+
+	predictions, err = ensemble.PredictProba(input)
+	assert.NilError(t, err)
+
+	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.4)
+	assert.NilError(t, err)
+
+	// with undefined depth
+	ensemble, err = LoadXGBoostFromJSON(modelPath,
+		"", 3, 0, &activation.Softmax{})
+	assert.NilError(t, err)
+
+	predictions, err = ensemble.Predict(input)
+	assert.NilError(t, err)
+
+	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0000)
 	assert.NilError(t, err)
 
 	predictions, err = ensemble.PredictProba(input)

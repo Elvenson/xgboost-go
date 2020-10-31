@@ -1,23 +1,22 @@
 package mat
 
 import (
-	"fmt"
 	"testing"
 
 	"gotest.tools/assert"
 )
 
-// TODO: Add more test.
 func TestReadLibsvmFile(t *testing.T) {
 	m, err := ReadLibsvmFileToSparseMatrix("../test/data/iris_test.libsvm")
 	assert.NilError(t, err)
-	fmt.Printf("%+v\n", m)
+	assert.Check(t, len(m.Vectors) != 0)
+	assert.Equal(t, len(m.Vectors[0]), 4)
 }
 
 func TestReadCSVFileToDenseMatrix(t *testing.T) {
-	m, err := ReadCSVFileToDenseMatrix("../test/data/iris_test.tsv", "\t", 0)
+	m, err := ReadCSVFileToDenseMatrix(
+		"../test/data/iris_xgboost_true_prediction_proba.txt", "\t", 0)
 	assert.NilError(t, err)
-	for _, v := range m.Vectors{
-		fmt.Printf("%+v\n", v)
-	}
+	assert.Check(t, len(m.Vectors) != 0)
+	assert.Equal(t, len(*m.Vectors[0]), 3)
 }

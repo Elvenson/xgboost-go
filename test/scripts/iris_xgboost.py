@@ -23,6 +23,5 @@ y_pred_proba = clf.predict_proba(X_test)
 
 np.savetxt('../data/iris_xgboost_true_prediction.txt', y_pred, delimiter='\t')
 np.savetxt('../data/iris_xgboost_true_prediction_proba.txt', y_pred_proba, delimiter='\t')
-np.savetxt('../data/iris_test.tsv', X_test, delimiter='\t')
 dump_svmlight_file(X_test, y_test, '../data/iris_test.libsvm')
 bst.dump_model('../data/iris_xgboost_dump.json', dump_format='json')

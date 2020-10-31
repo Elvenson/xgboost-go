@@ -8,9 +8,7 @@ import (
 
 // xgbtree constant values.
 const (
-	isLeaf        = 1
-	// TODO: Check this value.
-	zeroThreshold = 1e-35
+	isLeaf = 1
 )
 
 type xgbNode struct {

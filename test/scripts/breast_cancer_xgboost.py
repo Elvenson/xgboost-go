@@ -16,12 +16,11 @@ bst = xgb.train(classification_param, dtrain, num_round)
 y_pred = bst.predict(xgb.DMatrix(X_test))
 
 np.savetxt('../data/breast_cancer_xgboost_true_prediction.txt', y_pred, delimiter='\t')
-np.savetxt('../data/breast_cancer_test.tsv', X_test, delimiter='\t')
 dump_svmlight_file(X_test, y_test, '../data/breast_cancer_test.libsvm')
 bst.dump_model('../data/breast_cancer_xgboost_dump.json', dump_format='json')
 
 # Dump model with feature map.
-bst.dump_model('../data/breast_cancer_xgboost_dump_fmap.json', dump_format='json', fmap='../data/fmap_pandas.txt')
+bst.dump_model('../data/breast_cancer_xgboost_dump_fmap.json', dump_format='json', fmap='../data/breast_cancer_fmap.txt')
 
 # For regression.
 y_train_mean = np.mean(y_train)

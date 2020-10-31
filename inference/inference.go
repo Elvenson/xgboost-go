@@ -78,6 +78,7 @@ func (e *Ensemble) PredictProba(features mat.SparseMatrix) (mat.Matrix, error) {
 }
 
 // Predict predicts class using ensemble model interface.
+// If model is a binary classification model, the prediction results will be probabilities instead of classes.
 func (e *Ensemble) Predict(features mat.SparseMatrix) (mat.Matrix, error) {
 	if e.NumClasses() == 0 {
 		return mat.Matrix{}, fmt.Errorf("0 class please check your model")
@@ -112,4 +113,9 @@ func (e *Ensemble) Predict(features mat.SparseMatrix) (mat.Matrix, error) {
 	}
 
 	return results, nil
+}
+
+// Name returns ensemble model name.
+func (e *Ensemble) Name() string {
+	return e.EnsembleBase.Name()
 }
