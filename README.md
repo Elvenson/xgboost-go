@@ -1,6 +1,7 @@
 # xgboost-go
 
 [![Build Status](https://travis-ci.com/Elvenson/xgboost-go.svg?token=rzHXU1xSU77dfjTLof6x&branch=main)](https://travis-ci.com/github/Elvenson/xgboost-go)
+[![GoDoc](https://godoc.org/github.com/Elvenson/xgboost-go?status.png)](https://godoc.org/github.com/Elvenson/xgboost-go)
 
 XGBoost inference with Golang by means of exporting xgboost model into json format and load model from that json file. 
 This repo only supports [DMLC XGBoost](https://github.com/dmlc/xgboost) model at the moment.
