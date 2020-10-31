@@ -1,4 +1,4 @@
-module github.com/baobui/xgboost-go
+module github.com/Elvenson/xgboost-go
 
 go 1.14
 
