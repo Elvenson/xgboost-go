@@ -3,4 +3,5 @@ go:
   - "1.14"
 
 script:
+  - go get golang.org/x/lint/golint
   - make ci
