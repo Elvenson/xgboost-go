@@ -3,8 +3,8 @@ package activation
 import (
 	"fmt"
 
-	"github.com/baobui/xgboost-go/mat"
-	"github.com/baobui/xgboost-go/protobuf"
+	"github.com/Elvenson/xgboost-go/mat"
+	"github.com/Elvenson/xgboost-go/protobuf"
 )
 
 // Raw is struct contains necessary data for doing logistic calculation

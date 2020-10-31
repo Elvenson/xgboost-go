@@ -1,7 +1,7 @@
 package xgboost
 
 import (
-	"github.com/baobui/xgboost-go/mat"
+	"github.com/Elvenson/xgboost-go/mat"
 )
 
 type xgbEnsemble struct {

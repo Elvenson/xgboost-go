@@ -1,8 +1,8 @@
 package activation
 
 import (
-	"github.com/baobui/xgboost-go/mat"
-	"github.com/baobui/xgboost-go/protobuf"
+	"github.com/Elvenson/xgboost-go/mat"
+	"github.com/Elvenson/xgboost-go/protobuf"
 )
 
 // Activation is an interface that an activation needs to implement.

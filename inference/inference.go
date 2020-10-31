@@ -3,9 +3,9 @@ package inference
 import (
 	"fmt"
 
-	"github.com/baobui/xgboost-go/activation"
-	"github.com/baobui/xgboost-go/mat"
-	"github.com/baobui/xgboost-go/protobuf"
+	"github.com/Elvenson/xgboost-go/activation"
+	"github.com/Elvenson/xgboost-go/mat"
+	"github.com/Elvenson/xgboost-go/protobuf"
 )
 
 // EnsembleBase contains interface of a base model.
