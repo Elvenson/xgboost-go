@@ -58,9 +58,12 @@ func main() {
 
 Here `LoadXGBoostFromJSON` requires 5 parameters:
 * The json model path.
-* The number of classes, if this is a binary classification the number of classes should be 1)
+* DMLC feature map format, if no feature map leave this blank.
+* The number of classes (if this is a binary classification, the number of classes should be 1)
 * The depth of the tree, if unable to get the tree depth can specify 0 (slightly slower model built time)
 * Activation function, for now binary is `Logistic` multiclass is `Softmax` and regression is `Raw`.
 
-For more example, can take a look and `models/xgbensemble_test.go`
+For more example, can take a look at `xgbensemble_test.go` or read this package
+[documentation](https://godoc.org/github.com/Elvenson/xgboost-go).
 
+**NOTE**: This repo only got tested on Python `xgboost` package version `1.2.0`.
