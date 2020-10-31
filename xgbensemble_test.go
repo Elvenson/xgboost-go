@@ -5,8 +5,8 @@ import (
 
 	"gotest.tools/assert"
 
-	"github.com/baobui/xgboost-go/activation"
-	"github.com/baobui/xgboost-go/mat"
+	"github.com/Elvenson/xgboost-go/activation"
+	"github.com/Elvenson/xgboost-go/mat"
 )
 
 func TestEnsemble_PredictBreastCancer(t *testing.T) {

@@ -3,7 +3,7 @@ package xgboost
 import (
 	"fmt"
 
-	"github.com/baobui/xgboost-go/mat"
+	"github.com/Elvenson/xgboost-go/mat"
 )
 
 // xgbtree constant values.
