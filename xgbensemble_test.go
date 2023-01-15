@@ -131,7 +131,7 @@ func TestEnsemble_Iris(t *testing.T) {
 	predictions, err = ensemble.PredictProba(input)
 	assert.NilError(t, err)
 
-	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.4)
+	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
 	assert.NilError(t, err)
 
 	// with undefined depth
@@ -148,6 +148,6 @@ func TestEnsemble_Iris(t *testing.T) {
 	predictions, err = ensemble.PredictProba(input)
 	assert.NilError(t, err)
 
-	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.4)
+	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
 	assert.NilError(t, err)
 }

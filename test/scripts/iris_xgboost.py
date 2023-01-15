@@ -4,6 +4,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.datasets import dump_svmlight_file
 import numpy as np
 
+
+def softmax(x):
+    return np.exp(x) / np.expand_dims(np.sum(np.exp(x), axis=1), 1)
+
+
 X, y = datasets.load_iris(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
@@ -14,12 +19,7 @@ param = {'max_depth': 4, 'eta': 1, 'objective': 'multi:softmax', 'nthread': 4,
 num_round = 10
 bst = xgb.train(param, dtrain, num_round)
 y_pred = bst.predict(xgb.DMatrix(X_test))
-
-clf = xgb.XGBClassifier(max_depth=4, objective='multi:softprob', n_estimators=10,
-                        num_classes=3)
-
-clf.fit(X_train, y_train)
-y_pred_proba = clf.predict_proba(X_test)
+y_pred_proba = softmax(bst.predict(xgb.DMatrix(X_test), output_margin=True))
 
 np.savetxt('../data/iris_xgboost_true_prediction.txt', y_pred, delimiter='\t')
 np.savetxt('../data/iris_xgboost_true_prediction_proba.txt', y_pred_proba, delimiter='\t')
