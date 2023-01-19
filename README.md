@@ -4,7 +4,8 @@
 [![GoDoc](https://godoc.org/github.com/Elvenson/xgboost-go?status.png)](https://godoc.org/github.com/Elvenson/xgboost-go)
 
 XGBoost inference with Golang by means of exporting xgboost model into json format and load model from that json file. 
-This repo only supports [DMLC XGBoost](https://github.com/dmlc/xgboost) model at the moment.
+This repo only supports [DMLC XGBoost](https://github.com/dmlc/xgboost) model at the moment. For more information regarding 
+how XGBoost inference works, you can refer to this [medium article](https://medium.com/@bobi_29852/how-boosted-trees-inference-works-f161b03d5f5b).
 
 ## Features
 Currently, this repo only supports a few core features such as:
