@@ -1,8 +1,8 @@
+import numpy as np
 import xgboost as xgb
 from sklearn import datasets
-from sklearn.model_selection import train_test_split
 from sklearn.datasets import dump_svmlight_file
-import numpy as np
+from sklearn.model_selection import train_test_split
 
 
 def softmax(x):

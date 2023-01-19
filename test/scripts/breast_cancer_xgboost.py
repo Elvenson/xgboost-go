@@ -1,8 +1,8 @@
+import numpy as np
 import xgboost as xgb
 from sklearn import datasets
-from sklearn.model_selection import train_test_split
 from sklearn.datasets import dump_svmlight_file
-import numpy as np
+from sklearn.model_selection import train_test_split
 
 X, y = datasets.load_breast_cancer(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
@@ -20,7 +20,8 @@ dump_svmlight_file(X_test, y_test, '../data/breast_cancer_test.libsvm')
 bst.dump_model('../data/breast_cancer_xgboost_dump.json', dump_format='json')
 
 # Dump model with feature map.
-bst.dump_model('../data/breast_cancer_xgboost_dump_fmap.json', dump_format='json', fmap='../data/breast_cancer_fmap.txt')
+bst.dump_model('../data/breast_cancer_xgboost_dump_fmap.json', dump_format='json',
+    fmap='../data/breast_cancer_fmap.txt')
 
 # For regression.
 y_train_mean = np.mean(y_train)
@@ -38,4 +39,3 @@ bst = xgb.train(params=regression_params, dtrain=dtrain, num_boost_round=num_rou
 y_pred = bst.predict(xgb.DMatrix(X_test))
 np.savetxt('../data/breast_cancer_xgboost_true_prediction_regression.txt', y_pred, delimiter='\t')
 bst.dump_model('../data/breast_cancer_xgboost_dump_regression.json', dump_format='json')
-
