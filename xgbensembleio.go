@@ -149,27 +149,14 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 	return t, maxFeatIdx, nil
 }
 
-// LoadXGBoostFromJSON loads xgboost model from json file.
-func LoadXGBoostFromJSON(
-	modelPath,
+func LoadXGBoost(
+	xgbEnsembleJSON []*xgboostJSON,
 	featuresMapPath string,
 	numClasses int,
 	maxDepth int,
 	activation activation.Activation) (*inference.Ensemble, error) {
-	modelFile, err := os.Open(modelPath)
-	if err != nil {
-		return nil, err
-	}
-	defer modelFile.Close()
-
-	var xgbEnsembleJSON []*xgboostJSON
-
-	dec := json.NewDecoder(modelFile)
-	err = dec.Decode(&xgbEnsembleJSON)
-	if err != nil {
-		return nil, err
-	}
 	var featMap map[string]int
+	var err error
 	if len(featuresMapPath) != 0 {
 		featMap, err = loadFeatureMap(featuresMapPath)
 		if err != nil {
@@ -209,4 +196,43 @@ func LoadXGBoostFromJSON(
 	e.numFeat = maxFeat + 1
 
 	return &inference.Ensemble{EnsembleBase: e, Activation: activation}, nil
+}
+
+// LoadXGBoostFromJSON loads xgboost model from json file.
+func LoadXGBoostFromJSON(
+	modelPath,
+	featuresMapPath string,
+	numClasses int,
+	maxDepth int,
+	activation activation.Activation) (*inference.Ensemble, error) {
+	modelFile, err := os.Open(modelPath)
+	if err != nil {
+		return nil, err
+	}
+	defer modelFile.Close()
+
+	var xgbEnsembleJSON []*xgboostJSON
+
+	dec := json.NewDecoder(modelFile)
+	err = dec.Decode(&xgbEnsembleJSON)
+	if err != nil {
+		return nil, err
+	}
+	return LoadXGBoost(xgbEnsembleJSON, featuresMapPath, numClasses, maxDepth, activation)
+}
+
+func LoadXGBoostFromJSONBytes(
+	jsonBytes []byte,
+	featuresMapPath string,
+	numClasses int,
+	maxDepth int,
+	activation activation.Activation) (*inference.Ensemble, error) {
+
+	var xgbEnsembleJSON []*xgboostJSON
+
+	err := json.Unmarshal(jsonBytes, &xgbEnsembleJSON)
+	if err != nil {
+		return nil, err
+	}
+	return LoadXGBoost(xgbEnsembleJSON, featuresMapPath, numClasses, maxDepth, activation)
 }
