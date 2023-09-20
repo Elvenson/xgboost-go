@@ -205,19 +205,17 @@ func LoadXGBoostFromJSON(
 	numClasses int,
 	maxDepth int,
 	activation activation.Activation) (*inference.Ensemble, error) {
-	modelFile, err := os.Open(modelPath)
-	if err != nil {
-		return nil, err
-	}
-	defer modelFile.Close()
-
 	var xgbEnsembleJSON []*xgboostJSON
-
-	dec := json.NewDecoder(modelFile)
-	err = dec.Decode(&xgbEnsembleJSON)
+	d, err := os.ReadFile(modelPath)
 	if err != nil {
 		return nil, err
 	}
+
+	err = json.Unmarshal(d, &xgbEnsembleJSON)
+	if err != nil {
+		return nil, err
+	}
+
 	return LoadXGBoost(xgbEnsembleJSON, featuresMapPath, numClasses, maxDepth, activation)
 }
 

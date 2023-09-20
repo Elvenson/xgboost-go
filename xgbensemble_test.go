@@ -1,6 +1,7 @@
 package xgboost
 
 import (
+	"os"
 	"testing"
 
 	"gotest.tools/assert"
@@ -35,7 +36,7 @@ func TestEnsemble_PredictBreastCancer(t *testing.T) {
 	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
 	assert.NilError(t, err)
 
-	// with undefined depth
+	// With undefined depth
 	ensemble, err = LoadXGBoostFromJSON(modelPath,
 		"", 1, 0, &activation.Logistic{})
 	assert.NilError(t, err)
@@ -53,6 +54,18 @@ func TestEnsemble_PredictBreastCancer(t *testing.T) {
 	assert.NilError(t, err)
 
 	assert.Check(t, len(ensemble.Name()) != 0)
+
+	// Load from byte arr
+	data, err := os.ReadFile(modelPath)
+	assert.NilError(t, err)
+	ensemble, err = LoadXGBoostFromJSONBytes(data,
+		"", 1, 4, &activation.Logistic{})
+	assert.NilError(t, err)
+	predictions, err = ensemble.PredictProba(input)
+	assert.NilError(t, err)
+	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
+	assert.NilError(t, err)
+
 }
 
 func TestEnsemble_PredictBreastCancerFeatureMap(t *testing.T) {
@@ -80,6 +93,17 @@ func TestEnsemble_PredictBreastCancerFeatureMap(t *testing.T) {
 
 	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
 	assert.NilError(t, err)
+
+	// Load from byte arr
+	data, err := os.ReadFile(modelPath)
+	assert.NilError(t, err)
+	ensemble, err = LoadXGBoostFromJSONBytes(data,
+		"test/data/breast_cancer_fmap.txt", 1, 4, &activation.Logistic{})
+	assert.NilError(t, err)
+	predictions, err = ensemble.PredictProba(input)
+	assert.NilError(t, err)
+	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
+	assert.NilError(t, err)
 }
 
 func TestEnsemble_BreastCancerRegression(t *testing.T) {
@@ -100,6 +124,17 @@ func TestEnsemble_BreastCancerRegression(t *testing.T) {
 	expectedClasses, err := mat.ReadCSVFileToDenseMatrix(expectedPredPath, "\t", 0.0)
 	assert.NilError(t, err)
 
+	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
+	assert.NilError(t, err)
+
+	// Load from byte arr
+	data, err := os.ReadFile(modelPath)
+	assert.NilError(t, err)
+	ensemble, err = LoadXGBoostFromJSONBytes(data,
+		"", 1, 4, &activation.Raw{})
+	assert.NilError(t, err)
+	predictions, err = ensemble.PredictRegression(input, 0.6373626373626373)
+	assert.NilError(t, err)
 	err = mat.IsEqualMatrices(&predictions, &expectedClasses, 0.0001)
 	assert.NilError(t, err)
 }
@@ -148,6 +183,17 @@ func TestEnsemble_Iris(t *testing.T) {
 	predictions, err = ensemble.PredictProba(input)
 	assert.NilError(t, err)
 
+	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
+	assert.NilError(t, err)
+
+	// Load from byte arr
+	data, err := os.ReadFile(modelPath)
+	assert.NilError(t, err)
+	ensemble, err = LoadXGBoostFromJSONBytes(data,
+		"", 3, 0, &activation.Softmax{})
+	assert.NilError(t, err)
+	predictions, err = ensemble.PredictProba(input)
+	assert.NilError(t, err)
 	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
 	assert.NilError(t, err)
 }
