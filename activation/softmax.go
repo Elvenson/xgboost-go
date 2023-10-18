@@ -2,10 +2,10 @@ package activation
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/Elvenson/xgboost-go/mat"
 	"github.com/Elvenson/xgboost-go/protobuf"
+	"github.com/chewxy/math32"
 )
 
 // Softmax is struct contains necessary data for doing logistic calculation
@@ -14,10 +14,10 @@ type Softmax struct{}
 
 // softmax function.
 func softmax(vector mat.Vector) mat.Vector {
-	sum := 0.0
-	r := make([]float64, len(vector))
+	var sum float32 = 0.0
+	r := make([]float32, len(vector))
 	for i, v := range vector {
-		exp := math.Exp(v)
+		exp := math32.Exp(v)
 		r[i] = exp
 		sum += exp
 	}

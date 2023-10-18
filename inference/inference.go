@@ -22,7 +22,7 @@ type Ensemble struct {
 }
 
 // PredictRegression predicts float number for regression task using ensemble model interface.
-func (e *Ensemble) PredictRegression(features mat.SparseMatrix, baseVal float64) (mat.Matrix, error) {
+func (e *Ensemble) PredictRegression(features mat.SparseMatrix, baseVal float32) (mat.Matrix, error) {
 	if e.NumClasses() == 0 {
 		return mat.Matrix{}, fmt.Errorf("0 class please check your model")
 	}
@@ -109,7 +109,7 @@ func (e *Ensemble) Predict(features mat.SparseMatrix) (mat.Matrix, error) {
 			if err != nil {
 				return mat.Matrix{}, err
 			}
-			results.Vectors[i] = &mat.Vector{float64(idx)}
+			results.Vectors[i] = &mat.Vector{float32(idx)}
 		}
 	}
 

@@ -13,20 +13,20 @@ const (
 
 type xgbNode struct {
 	NodeID     int
-	Threshold  float64
+	Threshold  float32
 	Yes        int
 	No         int
 	Missing    int
 	Feature    int
 	Flags      uint8
-	LeafValues float64
+	LeafValues float32
 }
 
 type xgbTree struct {
 	nodes []*xgbNode
 }
 
-func (t *xgbTree) predict(features mat.SparseVector) (float64, error) {
+func (t *xgbTree) predict(features mat.SparseVector) (float32, error) {
 	idx := 0
 	for {
 		node := t.nodes[idx]

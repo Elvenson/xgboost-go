@@ -24,7 +24,7 @@ func (e *xgbEnsemble) NumClasses() int {
 // PredictInner returns prediction of this ensemble model.
 func (e *xgbEnsemble) PredictInner(features mat.SparseVector) (mat.Vector, error) {
 	// number of trees for 1 class.
-	pred := make([]float64, e.numClasses)
+	pred := make([]float32, e.numClasses)
 	numTreesPerClass := len(e.Trees) / e.numClasses
 	for i := 0; i < e.numClasses; i++ {
 		for k := 0; k < numTreesPerClass; k++ {

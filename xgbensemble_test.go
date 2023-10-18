@@ -197,3 +197,48 @@ func TestEnsemble_Iris(t *testing.T) {
 	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
 	assert.NilError(t, err)
 }
+
+func TestEnsemble_Diamond(t *testing.T) {
+	modelPath := "test/data/diamonds_xgboost_dump.json"
+	ensemble, err := LoadXGBoostFromJSON(modelPath,
+		"", 1, 5, &activation.Logistic{})
+	assert.NilError(t, err)
+
+	inputPath := "test/data/diamonds_test.libsvm"
+	input, err := mat.ReadLibsvmFileToSparseMatrix(inputPath)
+	assert.NilError(t, err)
+
+	expectedProbPath := "test/data/diamonds_xgboost_true_prediction_proba.txt"
+	expectedProb, err := mat.ReadCSVFileToDenseMatrix(expectedProbPath, "\t", 0.0)
+	assert.NilError(t, err)
+
+	predictions, err := ensemble.Predict(input)
+	assert.NilError(t, err)
+
+	// predict and predict proba should output probabilities for logistic activation
+	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
+	assert.NilError(t, err)
+
+	predictions, err = ensemble.PredictProba(input)
+	assert.NilError(t, err)
+
+	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
+	assert.NilError(t, err)
+
+	// with undefined depth
+	ensemble, err = LoadXGBoostFromJSON(modelPath,
+		"", 1, 0, &activation.Logistic{})
+	assert.NilError(t, err)
+
+	predictions, err = ensemble.Predict(input)
+	assert.NilError(t, err)
+
+	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
+	assert.NilError(t, err)
+
+	predictions, err = ensemble.PredictProba(input)
+	assert.NilError(t, err)
+
+	err = mat.IsEqualMatrices(&predictions, &expectedProb, 0.0001)
+	assert.NilError(t, err)
+}

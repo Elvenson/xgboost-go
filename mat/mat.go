@@ -4,19 +4,19 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"math"
 	"os"
 	"strconv"
 	"strings"
 
+	"github.com/chewxy/math32"
 	"github.com/pkg/errors"
 )
 
 // Vector is a list of float numbers.
-type Vector []float64
+type Vector []float32
 
 // SparseVector is a map with index is a key and value is a value at that index.
-type SparseVector map[int]float64
+type SparseVector map[int]float32
 
 // SparseMatrix is a list of sparse vectors.
 type SparseMatrix struct {
@@ -74,7 +74,7 @@ func ReadLibsvmFileToSparseMatrix(fileName string) (SparseMatrix, error) {
 			if err != nil {
 				return SparseMatrix{}, fmt.Errorf("cannot parse to float %s: %s", pair[1], err)
 			}
-			vec[int(colIdx)] = val
+			vec[int(colIdx)] = float32(val)
 		}
 		sparseMatrix.Vectors = append(sparseMatrix.Vectors, vec)
 	}
@@ -82,7 +82,7 @@ func ReadLibsvmFileToSparseMatrix(fileName string) (SparseMatrix, error) {
 }
 
 // ReadCSVFileToDenseMatrix reads CSV file to dense matrix.
-func ReadCSVFileToDenseMatrix(fileName string, delimiter string, defaultVal float64) (Matrix, error) {
+func ReadCSVFileToDenseMatrix(fileName string, delimiter string, defaultVal float32) (Matrix, error) {
 	file, err := os.Open(fileName)
 	if err != nil {
 		return Matrix{}, fmt.Errorf("unable to open %s: %s", fileName, err)
@@ -106,7 +106,7 @@ func ReadCSVFileToDenseMatrix(fileName string, delimiter string, defaultVal floa
 		tokens := strings.Split(line, delimiter)
 		vec := Vector{}
 		for i := 0; i < len(tokens); i++ {
-			var val float64
+			var val float32
 			if len(tokens[i]) == 0 {
 				val = defaultVal
 			} else {
@@ -114,7 +114,7 @@ func ReadCSVFileToDenseMatrix(fileName string, delimiter string, defaultVal floa
 				if err != nil {
 					return Matrix{}, fmt.Errorf("cannot convert to float %s: %s", tokens[i], err)
 				}
-				val = v
+				val = float32(v)
 			}
 			vec = append(vec, val)
 		}
@@ -131,12 +131,12 @@ func ReadCSVFileToDenseMatrix(fileName string, delimiter string, defaultVal floa
 }
 
 // IsEqualVectors compares 2 vectors with a threshold.
-func IsEqualVectors(v1, v2 *Vector, threshold float64) error {
+func IsEqualVectors(v1, v2 *Vector, threshold float32) error {
 	if len(*v1) != len(*v2) {
 		return fmt.Errorf("different vector length v1=%d, v2=%d", len(*v1), len(*v2))
 	}
 	for i := range *v1 {
-		if math.Abs((*v1)[i]-(*v2)[i]) > threshold {
+		if math32.Abs((*v1)[i]-(*v2)[i]) > threshold {
 			return fmt.Errorf("%d element mismatch: v1[%d]=%f, v2[%d]=%f", i, i, (*v1)[i], i, (*v2)[i])
 		}
 	}
@@ -148,7 +148,7 @@ func GetVectorMaxIdx(v *Vector) (int, error) {
 	if len(*v) == 0 {
 		return -1, fmt.Errorf("empty vector")
 	}
-	maxVal := math.Inf(-1)
+	maxVal := math32.Inf(-1)
 	r := 0
 	for idx, i := range *v {
 		if i > maxVal {
@@ -160,7 +160,7 @@ func GetVectorMaxIdx(v *Vector) (int, error) {
 }
 
 // IsEqualMatrices compares 2 matrices with a threshold.
-func IsEqualMatrices(m1, m2 *Matrix, threshold float64) error {
+func IsEqualMatrices(m1, m2 *Matrix, threshold float32) error {
 	if len(m1.Vectors) != len(m2.Vectors) {
 		return fmt.Errorf("row  matrix mismatch: m1 got %d rows, m2 got %d rows", len(m1.Vectors), len(m2.Vectors))
 	}

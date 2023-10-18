@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"math"
 	"os"
 	"sort"
 	"strconv"
@@ -13,16 +12,17 @@ import (
 
 	"github.com/Elvenson/xgboost-go/activation"
 	"github.com/Elvenson/xgboost-go/inference"
+	"github.com/chewxy/math32"
 )
 
 type xgboostJSON struct {
 	NodeID                int            `json:"nodeid,omitempty"`
 	SplitFeatureID        string         `json:"split,omitempty"`
-	SplitFeatureThreshold float64        `json:"split_condition,omitempty"`
+	SplitFeatureThreshold float32        `json:"split_condition,omitempty"`
 	YesID                 int            `json:"yes,omitempty"`
 	NoID                  int            `json:"no,omitempty"`
 	MissingID             int            `json:"missing,omitempty"`
-	LeafValue             float64        `json:"leaf,omitempty"`
+	LeafValue             float32        `json:"leaf,omitempty"`
 	Children              []*xgboostJSON `json:"children,omitempty"`
 }
 
@@ -87,7 +87,7 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 	var maxNumNodes int
 	var maxIdx int
 	if maxDepth != 0 {
-		maxNumNodes = int(math.Pow(2, float64(maxDepth+1)) - 1)
+		maxNumNodes = int(math32.Pow(2, float32(maxDepth+1)) - 1)
 		t.nodes = make([]*xgbNode, maxNumNodes)
 	}
 	for len(stack) > 0 {
@@ -118,7 +118,7 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 			}
 			// find real length of the tree.
 			if maxDepth != 0 {
-				t := int(math.Max(float64(stackData.NoID), float64(stackData.YesID)))
+				t := int(math32.Max(float32(stackData.NoID), float32(stackData.YesID)))
 				if t > maxIdx {
 					maxIdx = t
 				}
