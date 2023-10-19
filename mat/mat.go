@@ -70,7 +70,7 @@ func ReadLibsvmFileToSparseMatrix(fileName string) (SparseMatrix, error) {
 			if err != nil {
 				return SparseMatrix{}, fmt.Errorf("cannot parse to int %s: %s", pair[0], err)
 			}
-			val, err := strconv.ParseFloat(pair[1], 64)
+			val, err := strconv.ParseFloat(pair[1], 32)
 			if err != nil {
 				return SparseMatrix{}, fmt.Errorf("cannot parse to float %s: %s", pair[1], err)
 			}
@@ -110,7 +110,7 @@ func ReadCSVFileToDenseMatrix(fileName string, delimiter string, defaultVal floa
 			if len(tokens[i]) == 0 {
 				val = defaultVal
 			} else {
-				v, err := strconv.ParseFloat(tokens[i], 64)
+				v, err := strconv.ParseFloat(tokens[i], 32)
 				if err != nil {
 					return Matrix{}, fmt.Errorf("cannot convert to float %s: %s", tokens[i], err)
 				}
