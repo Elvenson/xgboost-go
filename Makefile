@@ -2,7 +2,7 @@
 
 # Definition
 SHELL := /bin/bash # use bash all the time!
-FILES = $(shell find . -type f -name "*.go" | grep -v "vendor")
+FILES = $(shell find . -type f -name "*.go" | grep -v "vendor" | grep -v "^\./\.")
 
 # `make help` for more
 help: ## This is help dialog.
@@ -25,8 +25,12 @@ help h:
 vet:	## Vet the codebase.
 	@go vet ./...
 
-lint:	## Lint the codebase.
-	@golint -set_exit_status ./...
+lint:	## Go lint files
+	STATUS=0; \
+	for FILE in $(FILES); do \
+  		golint -set_exit_status $$FILE || STATUS=1; \
+  	done ;\
+  	exit $$STATUS
 
 gotest: ## Go test codebase.
 	go test ./...
