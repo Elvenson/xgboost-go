@@ -2,10 +2,10 @@ package activation
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/Elvenson/xgboost-go/mat"
 	"github.com/Elvenson/xgboost-go/protobuf"
+	"github.com/chewxy/math32"
 )
 
 // Logistic is struct contains necessary data for doing logistic calculation
@@ -13,8 +13,8 @@ import (
 type Logistic struct{}
 
 // sigmoid applies sigmoid transformation to value
-func sigmoid(x float64) float64 {
-	return 1.0 / (1.0 + math.Exp(-x))
+func sigmoid(x float32) float32 {
+	return 1.0 / (1.0 + math32.Exp(-x))
 }
 
 // Transform passes prediction through logistic function.
