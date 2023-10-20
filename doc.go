@@ -3,11 +3,12 @@ Package xgboost is a pure Golang implementation of loading DMLC XGBoost json mod
 API. This package supports binary, multiclass and regression inference. Note that this package is just for inference
 purpose only, for training part please reference to https://github.com/dmlc/xgboost.
 
-Training model
+# Training model
 
 In order to have a json encoded model file, we need to train the model via Python first:
 
 iris_xgboost.py:
+
 	import xgboost as xgb
 	from sklearn import datasets
 	from sklearn.model_selection import train_test_split
@@ -37,6 +38,7 @@ iris_xgboost.py:
 	bst.dump_model('../data/iris_xgboost_dump.json', dump_format='json')
 
 Here is how to load the model exported from the above script:
+
 	package main
 
 	import (
@@ -66,6 +68,5 @@ Here is how to load the model exported from the above script:
 	}
 
 For more information, please take a look at xgbensemble_test.go
-
 */
 package xgboost

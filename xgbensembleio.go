@@ -149,7 +149,7 @@ func buildTree(xgbTreeJSON *xgboostJSON, maxDepth int, featureMap map[string]int
 	return t, maxFeatIdx, nil
 }
 
-func LoadXGBoost(
+func loadXGBoost(
 	xgbEnsembleJSON []*xgboostJSON,
 	featuresMapPath string,
 	numClasses int,
@@ -216,9 +216,10 @@ func LoadXGBoostFromJSON(
 		return nil, err
 	}
 
-	return LoadXGBoost(xgbEnsembleJSON, featuresMapPath, numClasses, maxDepth, activation)
+	return loadXGBoost(xgbEnsembleJSON, featuresMapPath, numClasses, maxDepth, activation)
 }
 
+// LoadXGBoostFromJSONBytes loads XGBoost model from bytes.
 func LoadXGBoostFromJSONBytes(
 	jsonBytes []byte,
 	featuresMapPath string,
@@ -232,5 +233,5 @@ func LoadXGBoostFromJSONBytes(
 	if err != nil {
 		return nil, err
 	}
-	return LoadXGBoost(xgbEnsembleJSON, featuresMapPath, numClasses, maxDepth, activation)
+	return loadXGBoost(xgbEnsembleJSON, featuresMapPath, numClasses, maxDepth, activation)
 }

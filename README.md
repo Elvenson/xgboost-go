@@ -68,3 +68,16 @@ For more example, can take a look at `xgbensemble_test.go` or read this package
 [documentation](https://godoc.org/github.com/Elvenson/xgboost-go).
 
 **NOTE**: This repo only got tested on Python `xgboost` package version `1.2.0`.
+
+## Contribution:
+All contributions are welcome. Before submitting a pull request, we first need to format the code using the
+following command:
+```shell
+make fmt
+```
+
+Then run the following command to check if everything is good:
+```shell
+make ci
+```
+
